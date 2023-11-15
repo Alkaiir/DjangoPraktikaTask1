@@ -1,4 +1,6 @@
+from django.http import Http404
 from django.shortcuts import render
+from django.views import generic
 
 from catalog.models import BookInstance, Author, Book, Genre
 
@@ -21,3 +23,19 @@ def index(request):
     }
 
     return render(request, 'index.html', context=context)
+
+
+class BookListView(generic.ListView):
+    model = Book
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+
+    def book_detail_view(request, primary_key):
+        try:
+            book = Book.objects.get(pk=primary_key)
+        except Book.DoesNotExist:
+            raise Http404('Book does not exist')
+
+        return render(request, 'catalog/book_detail.html', context={'book': book})
