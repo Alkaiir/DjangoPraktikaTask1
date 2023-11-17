@@ -5,6 +5,10 @@ from django.contrib import admin
 from .models import Author, Genre, Book, BookInstance, Language
 
 # Логин
+# user
+# Пароль
+# V2Os1aZX_N
+# Логин
 # librarian
 # Пароль
 # V2Os1aZX_N
